@@ -23,7 +23,7 @@ setup(
     packages=find_packages(include=['warinner_samples']),
     entry_points={
         'console_scripts': [
-            'warinner_samples= warinner_samples.__main__:cli'
+            'warinner_samples= warinner_samples.cli:cli'
         ]
     }
 )
