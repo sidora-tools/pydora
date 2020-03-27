@@ -93,5 +93,6 @@ dependencies:
   - zeromq=4.3.2
   - zipp=3.1.0
   - zlib=1.2.11
+  - tqdm=4.43.0
 prefix: /Users/borry/miniconda3/envs/paleobiotech
 
