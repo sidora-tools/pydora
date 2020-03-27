@@ -1,13 +1,7 @@
-def build_query(tags, projects):
+def build_join_query(tags, projects):
     query = f"""
     SELECT *
-    FROM `TAB_Analysis_Result_String` ars
-
-    INNER JOIN `TAB_Analysis` an 
-    ON ars.`Analysis`= an.`Id`
-    
-    INNER JOIN `TAB_Raw_Data` rd 
-    ON an.`Raw_Data` = rd.`Id`
+    FROM `TAB_Raw_Data` rd 
 
     INNER JOIN `TAB_Sequencing` seq 
     ON rd.`Sequencing` = seq.`Id`
@@ -35,7 +29,7 @@ def build_query(tags, projects):
 
     INNER JOIN (
         SELECT Id, Name as Sample_Type_Name 
-        FROM `TAB_Type_Group`
+        FROM `TAB_Type_Group`   
     ) AS typ 
     ON samp.`Type_Group` = typ.Id
 
@@ -48,10 +42,15 @@ def build_query(tags, projects):
     INNER JOIN `TAB_Organism` AS org
     ON ind.`Organism` = org.Id
 
-    WHERE samp.`Projects` in (
-    '{"','".join([t for t in tags])}')
-    OR samp.Tags REGEXP('{"|".join([t for t in tags])}')
-    AND an.Deleted = 'false'
+    WHERE samp.`Projects` REGEXP '{"|".join([p for p in projects])}'
+    OR samp.Tags REGEXP '{"|".join([t for t in tags])}'
     """
 
+    return(query)
+
+def build_single_query(table_name):
+    query = f"""
+    SELECT *
+    FROM {table_name}
+    """
     return(query)
