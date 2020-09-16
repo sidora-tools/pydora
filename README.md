@@ -17,7 +17,7 @@ $ conda activate paleobiotech
 - Install using pip
 
 ```bash
-$ pip install git+ssh://git@gitlab.gwdg.de/paleobiotech/warinner-samples.git
+$ pip install git+ssh://git@github.com:paleobiotechnology/warinner_samples.git
 ```
 
 ## Example
