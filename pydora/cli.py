@@ -50,9 +50,32 @@ def cli(no_args_is_help=True, **kwargs):
     Homepage: github.com/sidora-tools/pydora
     \b
     """
-
+    projects = kwargs["projects"]
+    kwargs.pop("projects", None)
+    tags = kwargs["tags"]
+    kwargs.pop("tags", None)
     credentials = kwargs["credentials"]
     kwargs.pop("credentials", None)
 
+    if projects:
+        projects_list = []
+        with open(projects, "r") as p:
+            for line in p:
+                projects_list.append(line.rstrip())
+    else:
+        projects_list = None
+    if tags:
+        tags_list = []
+        with open(tags, "r") as t:
+            for line in t:
+                tags_list.append(line.rstrip())
+    else:
+        tags_list = None
+
+    filter_list = {'projects': projects_list, 
+                   'tags': tags_list}
+    
+
     cred = get_credentials(credentials)
-    retrieve_samples(**kwargs, **cred)
+    print(kwargs)
+    retrieve_samples(**kwargs, **cred, **filter_list)
