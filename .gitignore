@@ -5,3 +5,4 @@ pydora.egg-info
 .ipynb_checkpoints
 pydora.csv
 pandora_samples.csv
+docs/build

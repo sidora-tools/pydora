@@ -17,7 +17,9 @@ __ homepage_
 
    README
    API
-   CLI   
+   CLI
+   example_files
+   ssh_tunnel   
 
 
 
