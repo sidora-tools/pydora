@@ -10,7 +10,7 @@ setup(
     version=__version__,
     description="Toolkot to retrive samples and metadata from MPI-EVA Pandora dabase",
     long_description=README,
-    url="https://gitlab.gwdg.de/paleobiotech/pydora",
+    url="https://github.com/sidora-tools/pydora",
     long_description_content_type="text/markdown",
     license="GPLv3",
     python_requires=">=3.6",
