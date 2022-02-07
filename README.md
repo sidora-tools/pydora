@@ -1,6 +1,6 @@
-# warinner-samples
+# PyDora
 
-Tools to retrieve samples metadata and informations from MPI-SHH internal database.
+Toolkit to retrieve samples metadata and informations from MPI-EVA internal database. The Python cousin of [Sidora](https://github.com/sidora-tools/sidora.core)
 
 
 ## Install
@@ -17,16 +17,17 @@ $ conda activate paleobiotech
 - Install using pip
 
 ```bash
-$ pip install git+ssh://git@github.com/paleobiotechnology/warinner_samples.git
+$ pip install git+ssh://git@github.com/paleobiotechnology/pydora.git
 ```
 
 ## Example
 
 ```bash
-$ warinner_samples credentials.json data/projects.txt data/tags.txt
-Connected to Pandora Database
-Retrieving samples and metadata
-Samples and metadata have been written to /Users/borry/Documents/GWDG_Gitlab/warinner-samples/warinner_samples.csv
+$ pydora -c credentials.json -t assets/example_tags.txt
+Successfully Connected to Pandora Database
+Making request to Pandora SQL server
+Downloaded table
+Samples and metadata have been written to /Users/maxime/Documents/github/pydora/pandora_samples.csv
 ```
 
 ## Help
@@ -34,10 +35,10 @@ Samples and metadata have been written to /Users/borry/Documents/GWDG_Gitlab/war
 
 ### Help menu 
 ```bash
-$ warinner_samples --help
-Usage: warinner_samples [OPTIONS] CREDENTIALS PROJECTS TAGS
+$ pydora --help
+Usage: pydora [OPTIONS]
 
-  warinner_samples: retrieve samples metadata and informations from MPI-SHH internal database
+  pydora: retrieve samples metadata and informations from MPI-SHH internal database
   Author: Maxime Borry
   Contact: <borry[at]shh.mpg.de>
   Homepage: https://gitlab.gwdg.de/paleobiotech/warinner-samples
@@ -47,141 +48,30 @@ Usage: warinner_samples [OPTIONS] CREDENTIALS PROJECTS TAGS
   TAGS: File containing the list of tags to include (1 per line)
 
 Options:
-  --version            Show the version and exit.
-  --join [sql|pandas]  Join method  [default: sql]
-  -o, --output PATH    Warinner samples metadata information  [default:
-                       warinner_samples.csv]
-  --help               Show this message and exit.
+  --version               Show the version and exit.
+  -c, --credentials PATH  [default: credentials.json]
+  -p, --projects PATH     File listing projects to include (one per line)
+  -t, --tags PATH         File listing tags to include (one per line)
+  --join [sql|pandas]     Join method  [default: sql]
+  -o, --output PATH       Warinner samples metadata information  [default:
+                          pandora_samples.csv]
+  --help                  Show this message and exit.
 ```
 
 ### Example input files
 
-- An example [credentials.json](example_credentials.json) file
-- An example [projects.txt](data/projects.txt) file
-- An example [data/tags.txt](data/tags.txt) file
-
-## Column list:
-
-TBD when clearer deliverables.
+- An example [credentials.json](assets/example_credentials.json) file. For real credentials, please ask on the [Sidora mattermost channel](https://mattermost.eva.mpg.de/mpi-eva-dag/channels/sidora)
+- An example [projects.txt](assets/example_projects.txt) file
+- An example [tags.txt](assets/example_tags.txt) file
 
 
-## Pandora informations of interest to retrieve Warinner's group samples
+### Connecting through `shh` tunnel to Pandora
 
-### Projects:
+When connecting from outside the MPI-EVA servers (e.g.) from your laptop, through the VPN, you have to establish a shh tunnel
 
-- DAIRYCULTURES
-
-- DAIRYCULTURES,Heirloom_Microbes
-
-- Heirloom_Microbes
-
-- Nepal_Upper_Mustang
-
-- Oral_Microbiome_Evolution
-
-- Origins of Dairying
-
-- Richard III
-
-### Tags
-
-- Deep_Evolution
-
-- Iberian_Transect
-
-- Oral_Microbiome
-
-- Richard_III
-
-- Smoker calculus
-
-- Modern dairy
-
-- Nepal
-
-- Pacific_calculus
-
-- Unified_protocol
-
-- Dental_arcade
-
-- Modern_African_calculus
-
-- James Fellows Yates
-
-- Zandra Fagernäs
-
-- Modern_African_calculus
-
-- Irina_Velsko
-
-- Tina Warinner
-
-- Lena Semerau
-
-#### Pandora SQL request
-
-```sql
-SELECT *
-FROM `TAB_Raw_Data` rd
-
-INNER JOIN `TAB_Sequencing` seq ON
-rd.`Sequencing` = seq.`Id`
-
-INNER JOIN `TAB_Capture` cap
-ON seq.`Capture` = cap.Id
-
-INNER JOIN `TAB_Library` lib
-ON cap.`Library` = lib.`Id`
-
-INNER JOIN `TAB_Protocol` AS lib_prot
-ON lib.`Protocol` = lib_prot.`Id`
-
-INNER JOIN `TAB_Extract` ext
-ON lib.`Extract` = ext.`Id`
-
-INNER JOIN `TAB_Sample` samp
-ON ext.`Sample` = samp.`Id`
-
-INNER JOIN `TAB_Protocol` AS ext_prot
-ON ext.`Protocol` = ext_prot.`Id`
-
-INNER JOIN (
-	SELECT Id, Name as Sample_Type_Name 
-	FROM `TAB_Type_Group`
-) AS typ 
-ON samp.`Type_Group` = typ.Id
-
-INNER JOIN `TAB_Individual` ind
-ON samp.`Individual` = ind.`Id`
-
-INNER JOIN `TAB_Site` AS sit
- ON ind.`Site` = sit.`Id`
- 
-WHERE samp.`Projects` in (
- 'DAIRYCULTURES',
- 'DAIRYCULTURES,Heirloom_Microbes',
- 'Heirloom_Microbes',
- 'Nepal_Upper_Mustang',
- 'Oral_Microbiome_Evolution',
- 'Origins of Dairying',
- 'Richard III')
- 
-OR samp.Tags REGEXP('Deep_Evolution|
- Iberian_Transect|
- James Fellows Yates|
- Oral_Microbiome|
- Dental_arcade|
- Zandra Fagernäs|
- Irina_Velsko|
- Modern_African_calculus|
- Tina Warinner|
- Richard_III|
- Lena Semerau|
- Smoker calculus|
- Modern dairy|
- Nepal|
- Pacific_calculus|
- Unified_protocol')
- 
+```bash
+ssh -L 10001:pandora.eva.mpg.de:3306 <yourusername>@daghead1
 ```
+
+You will need to slightly modify the credentials `json` file to account for the shh tunnel. An example `credentials.json` file when working through a ssh tunnel can be found here [assets/example_credentials_ssh_tunnel.json](assets/example_credentials_ssh_tunnel.json)
+

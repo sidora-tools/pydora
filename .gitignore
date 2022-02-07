@@ -1,6 +1,7 @@
 credentials.json
 __pycache__
-warinner_samples.egg-info
+pydora.egg-info
 .~lock*
 .ipynb_checkpoints
-warinner_samples.csv
+pydora.csv
+pandora_samples.csv

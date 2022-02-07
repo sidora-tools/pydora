@@ -1,7 +1,34 @@
+from tkinter import N
+
+
 def build_join_query(tags, projects):
+
+    if projects and tags is None:
+        filter_query = f"""
+    WHERE samp.`Projects` REGEXP '{"|".join([p for p in projects])}'
+        """
+    if tags and projects is None:
+        filter_query = f"""
+    WHERE samp.Tags REGEXP '{"|".join([t for t in tags])}'
+        """
+    if tags and projects:
+        filter_query = f"""
+    WHERE samp.`Projects` REGEXP '{"|".join([p for p in projects])}'
+    OR samp.Tags REGEXP '{"|".join([t for t in tags])}'
+        """
+    if tags is None and projects is None:
+        filter_query = ""
+
     query = f"""
     SELECT *
-    FROM `TAB_Raw_Data` rd 
+
+    FROM `TAB_Analysis_Result_String` ard
+
+    INNER JOIN `TAB_Analysis` an
+    ON ard.`Analysis` = an.`Id`
+
+    INNER JOIN `TAB_Raw_Data` rd 
+    ON an.`Raw_Data` = rd.`Id`
 
     INNER JOIN `TAB_Sequencing` seq 
     ON rd.`Sequencing` = seq.`Id`
@@ -41,16 +68,14 @@ def build_join_query(tags, projects):
     
     INNER JOIN `TAB_Organism` AS org
     ON ind.`Organism` = org.Id
-
-    WHERE samp.`Projects` REGEXP '{"|".join([p for p in projects])}'
-    OR samp.Tags REGEXP '{"|".join([t for t in tags])}'
     """
+    query = query + filter_query
+    return query
 
-    return(query)
 
 def build_single_query(table_name):
     query = f"""
     SELECT *
     FROM {table_name}
     """
-    return(query)
+    return query

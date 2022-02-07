@@ -1,5 +1,7 @@
 join_keys = [
     # [Left table, Right Table, Left on, Right on]
+    ['TAB_Analysis_Result_String', 'TAB_Analysis', 'Analysis_Analysis_Result_String', 'Id_Analysis'],
+    ['TAB_Analysis', 'TAB_Raw_Data', 'Raw_Data_Analysis', 'Id_Raw_Data'],
     ['TAB_Raw_Data','TAB_Sequencing','Sequencing_Raw_Data','Id_Sequencing'],
     ['TAB_Sequencing','TAB_Sequencing_Setup','Setup_Sequencing','Id_Sequencing_Setup'],
     ['TAB_Sequencing','TAB_Capture','Capture_Sequencing', 'Id_Capture'],
@@ -15,6 +17,8 @@ join_keys = [
 ]
 tables = {
     # table : suffix
+    'TAB_Analysis_Result_String': '_Analysis_Result_String',
+    'TAB_Analysis': '_Analysis',
     'TAB_Raw_Data': '_Raw_Data',
     'TAB_Sequencing':'_Sequencing',
     'TAB_Sequencing_Setup':'_Sequencing_Setup',
