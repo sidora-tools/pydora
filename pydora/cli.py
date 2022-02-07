@@ -47,7 +47,7 @@ def cli(no_args_is_help=True, **kwargs):
     PyDora: Retrieve samples and metadata from MPI-EVA Pandora internal database
     Author: Maxime Borry
     Contact: <maxime_borry[at]eva.mpg.de>
-    Homepage: https://gitlab.gwdg.de/paleobiotech/pydora
+    Homepage: github.com/sidora-tools/pydora
     \b
     """
 
