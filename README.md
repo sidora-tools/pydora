@@ -1,26 +1,38 @@
 # PyDora
 
-Toolkit to retrieve samples metadata and informations from MPI-EVA internal database. The Python cousin of [Sidora](https://github.com/sidora-tools/sidora.core)
+PyDora is a toolkit to retrieve samples an metadata and  from Pandora MPI-EVA internal database. PyDora is the Python cousin of [Sidora](https://github.com/sidora-tools/sidora.core)
 
 
 ## Install
 
-- Install dependancies with conda
+- Install using pip (most people)
+
+  1. If you **don't** have set up your GitHub ssh keys
+
+  ```bash
+  $ pip install git+https://github.com/sidora-tools/pydora
+  ```
+
+  2. If you have set up your GitHub ssh keys
+
+  ```bash
+  $ pip install git+ssh://git@github.com/sidora-tools/pydora.git
+  ```
+
+
+
+- Install in dev environment
 
 ```bash
-$ git clone git@gitlab.gwdg.de:paleobiotech/warinner-samples.git
-$ cd warinner-samples
+$ git clone git@github.com/sidora-tools/pydora.git
+$ cd pydora
 $ conda create -f environment.yml
-$ conda activate paleobiotech
+$ conda activate pydora_dev
+$ pip install -e .
 ```
 
-- Install using pip
 
-```bash
-$ pip install git+ssh://git@github.com/paleobiotechnology/pydora.git
-```
-
-## Example
+## Example usage
 
 ```bash
 $ pydora -c credentials.json -t assets/example_tags.txt
@@ -32,8 +44,6 @@ Samples and metadata have been written to /Users/maxime/Documents/github/pydora/
 
 ## Help
 
-
-### Help menu 
 ```bash
 $ pydora --help
 Usage: pydora [OPTIONS]

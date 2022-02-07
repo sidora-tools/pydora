@@ -1,8 +1,7 @@
-from email.policy import default
 import click
-from . import __version__
-from . import get_credentials
-from . import retrieve_samples
+from pydora import __version__
+from pydora import get_credentials
+from pydora import retrieve_samples
 
 
 @click.command()

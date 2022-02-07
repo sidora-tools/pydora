@@ -1,6 +1,3 @@
-from tkinter import N
-
-
 def build_join_query(tags, projects):
 
     if projects and tags is None:

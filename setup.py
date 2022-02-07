@@ -17,7 +17,6 @@ setup(
     install_requires=[
         "pandas >=0.24.1",
         "sqlalchemy >= 1.3.13",
-        "plotnine >=0.6.0",
         "click >=7.0",
         "tqdm >=4.43.0",
     ],
