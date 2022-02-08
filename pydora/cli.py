@@ -77,5 +77,4 @@ def cli(no_args_is_help=True, **kwargs):
     
 
     cred = get_credentials(credentials)
-    print(kwargs)
     retrieve_samples(**kwargs, **cred, **filter_list)

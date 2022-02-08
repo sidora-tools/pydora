@@ -2,7 +2,7 @@
 
 # PyDora
 
-PyDora is a toolkit to retrieve samples an metadata and  from Pandora MPI-EVA internal database. PyDora is the Python cousin of [Sidora](https://github.com/sidora-tools/sidora.core).  
+PyDora is a toolkit to retrieve samples and metadata from the MPI-EVA Pandora internal database. PyDora is the Python cousin of [Sidora](https://github.com/sidora-tools/sidora.core).  
 
 You can use PyDora both as a [command line tool](https://pydora.readthedocs.io/en/latest/CLI.html), or directly [from Python](https://pydora.readthedocs.io/en/latest/API.html).
 
