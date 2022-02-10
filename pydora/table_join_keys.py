@@ -4,7 +4,7 @@ join_keys = [
     ['TAB_Analysis', 'TAB_Raw_Data', 'Raw_Data_Analysis', 'Id_Raw_Data'],
     ['TAB_Raw_Data', 'TAB_Protocol', 'Protocol_Raw_Data', 'Id_Protocol'],
     ['TAB_Raw_Data','TAB_Sequencing','Sequencing_Raw_Data','Id_Sequencing'],
-    ['TAB_Sequencing','TAB_Sequencing_Sequencer','Sequencing_Sequencer_Sequencing','Id_Sequencing_Sequencer'],
+    ['TAB_Sequencing','TAB_Sequencing_Sequencer','Sequencer_Sequencing','Id_Sequencing_Sequencer'],
     ['TAB_Sequencing','TAB_Sequencing_Setup','Setup_Sequencing','Id_Sequencing_Setup'],
     ['TAB_Sequencing','TAB_Capture','Capture_Sequencing', 'Id_Capture'],
     ['TAB_Capture','TAB_Library','Library_Capture', 'Id_Library'],
