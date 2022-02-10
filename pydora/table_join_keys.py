@@ -2,14 +2,16 @@ join_keys = [
     # [Left table, Right Table, Left on, Right on]
     ['TAB_Analysis_Result_String', 'TAB_Analysis', 'Analysis_Analysis_Result_String', 'Id_Analysis'],
     ['TAB_Analysis', 'TAB_Raw_Data', 'Raw_Data_Analysis', 'Id_Raw_Data'],
+    ['TAB_Raw_Data', 'TAB_Protocol', 'Protocol_Raw_Data', 'Id_Protocol'],
     ['TAB_Raw_Data','TAB_Sequencing','Sequencing_Raw_Data','Id_Sequencing'],
+    ['TAB_Sequencing','TAB_Sequencing_Sequencer','Sequencing_Sequencer_Sequencing','Id_Sequencing_Sequencer'],
     ['TAB_Sequencing','TAB_Sequencing_Setup','Setup_Sequencing','Id_Sequencing_Setup'],
     ['TAB_Sequencing','TAB_Capture','Capture_Sequencing', 'Id_Capture'],
     ['TAB_Capture','TAB_Library','Library_Capture', 'Id_Library'],
     ['TAB_Library','TAB_Protocol','Protocol_Library','Id_Protocol'],
     ['TAB_Library','TAB_Extract','Extract_Library','Id_Extract'],
-    ['TAB_Extract','TAB_Sample','Sample_Extract', 'Id_Sample'],
     ['TAB_Extract','TAB_Protocol','Protocol_Extract', 'Id_Protocol'],
+    ['TAB_Extract','TAB_Sample','Sample_Extract', 'Id_Sample'],
     ['TAB_Sample','TAB_Type_Group','Type_Group_Sample','Id_Type_Group'],
     ['TAB_Sample','TAB_Individual','Individual_Sample','Id_Individual'],
     ['TAB_Individual','TAB_Site','Site_Individual','Id_Site'],
@@ -30,5 +32,6 @@ tables = {
     'TAB_Sample':'_Sample',
     'TAB_Individual':'_Individual',
     'TAB_Site':'_Site',
-    'TAB_Organism':'_Organism'
+    'TAB_Organism':'_Organism',
+    'TAB_Sequencing_Sequencer':'_Sequencing_Sequencer',
 }

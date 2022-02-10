@@ -72,9 +72,7 @@ def cli(no_args_is_help=True, **kwargs):
     else:
         tags_list = None
 
-    filter_list = {'projects': projects_list, 
-                   'tags': tags_list}
-    
+    filter_list = {"projects": projects_list, "tags": tags_list}
 
     cred = get_credentials(credentials)
     retrieve_samples(**kwargs, **cred, **filter_list)

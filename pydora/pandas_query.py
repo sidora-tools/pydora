@@ -13,15 +13,20 @@ def build_join_query(tags, projects, engine):
             table_info.tables[t]
         )
 
-    join_table = all_tables["TAB_Analysis_Result_String"]
+    join_table = all_tables[list(table_info.tables.keys())[0]]
     print("Joining tables with Pandas")
     for t in tqdm(table_info.join_keys):
         left_table = all_tables[t[0]]
         right_table = all_tables[t[1]]
         left_key = t[2]
         right_key = t[3]
+        print(f"Joining {t[0]} with {t[1]}")
         join_table = join_table.merge(
-            right_table, left_on=left_key, right_on=right_key, how="outer"
+            right_table,
+            left_on=left_key,
+            right_on=right_key,
+            how="outer",
+            suffixes=("", table_info.tables[t[1]]),
         )
 
     res_table = pd.DataFrame()

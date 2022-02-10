@@ -1,4 +1,4 @@
-__version__ = '0.2'
+__version__ = "0.2"
 
 import pandas as pd
 import sqlalchemy
@@ -24,7 +24,10 @@ def get_credentials(credentials):
         cred = json.load(c)
     return cred
 
-def retrieve_samples(host, port, login, password, projects, tags, output, join):
+
+def retrieve_samples(
+    host, port, login, password, projects=None, tags=None, output=None, join="sql"
+):
     """Retrive samples having projects or tags from Pandora DB
 
     Args:
@@ -55,13 +58,11 @@ def retrieve_samples(host, port, login, password, projects, tags, output, join):
             tags=tags, projects=projects, engine=engine
         )
     elif join == "sql":
-        query_string = sql_query.build_join_query(
-            tags=tags, projects=projects
-        )
+        query_string = sql_query.build_join_query(tags=tags, projects=projects)
         request = pd.read_sql_query(query_string, engine)
-    
+
     print("All samples and metadata successfully retrived")
-    
+
     if output:
         request.to_csv(output)
         print(f"Samples and metadata have been written to {output}")

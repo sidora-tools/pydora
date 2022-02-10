@@ -27,6 +27,9 @@ def build_join_query(tags, projects):
     INNER JOIN `TAB_Raw_Data` rd 
     ON an.`Raw_Data` = rd.`Id`
 
+    INNER JOIN `TAB_Protocol` AS raw_prot
+    ON rd.`Protocol` = raw_prot.`Id`
+
     INNER JOIN `TAB_Sequencing` seq 
     ON rd.`Sequencing` = seq.`Id`
 
